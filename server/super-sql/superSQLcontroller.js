@@ -42,18 +42,20 @@ superSQLController.createSQLModel = createSQLModel;
 
         //create Model Obj key: values
         dbData.forEach( (value) => {
-                                      for(var key in dbData){
-                                          for (var item in value) {
-                                              console.log('key:', item);
-                                              console.log('value:', value[item]);
-                                              _instanceData[item] = value[item];
-                                            }
-                                          }
-                                   });
+            for(var key in dbData){
+                for (var item in value) {
+                    _instanceData[item] = value[item];
+                  }
+                }
+         });
 
         //Create Model
-        let _SQLinstance  = `var ${db.database.table} = sequelize.define(${db.database.table}, ${_instanceData})`;
-    }
+        let _SQLinstance  = `var ${dataChunk.schema.data.table} = sequelize.define(${dataChunk.schema.data.table}, ${_instanceData})`;
+
+        console.log(_RequireSQL);
+        console.log(_SQLdataBase);
+        console.log(_SQLinstance);
+    },
 
 
     function createNoSQLModel(dataChunk) {
@@ -72,21 +74,20 @@ superSQLController.createSQLModel = createSQLModel;
 
         //create Model Obj key: values
         dbData.forEach( (value) => {
-                                      for(var key in dbData){
-                                          for (var item in value) {
-                                              console.log('key:', item);
-                                              console.log('value:', value[item]);
-                                              _instanceData[item] = value[item];
-                                            }
-                                          }
-                                   });
+              for(var key in dbData){
+                  for (var item in value) {
+                      //  value[item]);
+                      _instanceData[item] = value[item];
+                    }
+                  }
+           });
 
         //Create Model
         // CREATE MONGOOSE MODEL////////////////////////////////////
         // NOTE : This is the mongoose model
         // Example:  var Cat = mongoose.model('Cat',{name: String};
         // /////////////////////////////////////////////
-        let _Mongooseinstance  = `var ${dataChunk.data.table} = mongoose.model(${db.database.table}, ${_instanceData})`;
+        let _Mongooseinstance  = `var ${dataChunk.schema.data.table} = mongoose.model(${dataChunk.schema.data.table}, ${_instanceData});`;
 
         console.log(_RequireMongoose);
         console.log(_Mongooseconnect);
@@ -96,7 +97,8 @@ superSQLController.createSQLModel = createSQLModel;
 
  // console.log(JSON.stringify(dataChunk, null, '\t'));
 
- createNoSQLModel(dataChunk);
+ // createNoSQLModel(dataChunk);
+ createSQLModel(dataChunk);
 
 
 module.exports = superSQLController;
