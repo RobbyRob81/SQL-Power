@@ -55,7 +55,7 @@ superSQLController.createSQLModel = createSQLModel;
         console.log(_RequireSQL);
         console.log(_SQLdataBase);
         console.log(_SQLinstance);
-    },
+    }
 
 
     function createNoSQLModel(dataChunk) {
