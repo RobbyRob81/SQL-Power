@@ -8,14 +8,14 @@ superSQLController.createSQLModel = createSQLModel;
     const dataChunk = {
       "schema":{
       "database": {
-        "type"     : 'sql',
-        "username" : 'Sequelize.String',
-        "password" : 'Sequelize.String',
+        "type"     : 'SQL',
+        "username" : 'admin',
+        "password" : 'doughnuts',
         "url"      : 'localhost://3000'
       },
 
       "data": {
-        "table": 'table_name',
+        "table": 'user',
         "colORdocs" : [{
           "username" : "johnCrackersmacker",
           "password" : "yabbadabbado",
@@ -28,9 +28,9 @@ superSQLController.createSQLModel = createSQLModel;
 
     // SQL AND NOSQL GRAMMAR////////////////////////
     //        ------------------------------
-    // NOTE : |    SQL       |    NOSQL      |
+    // NOTE : |    SQL       |    NOSQL      |  = type
     //        ------------------------------
-    //        |    table     |   collection  |
+    //        |    table     |   collection  |  = table
     //        -------------------------------
     //        |    row       |   document    |
     //        -------------------------------
@@ -56,8 +56,9 @@ superSQLController.createSQLModel = createSQLModel;
 
         //Require SQL
         const _RequireSQL  =` var Sequelize = require('sequelize');\n`;
+
         //Create instance of Sequelize
-        const _SQLdataBase =`var sequelize = new Sequelize(${db.database.url}, ${db.database.username}, ${db.database.password});\n`;
+        const _SQLdataBase =`var sequelize = new Sequelize(\'${db.database.url}\', \'${db.database.username}\',\'${db.database.password}\');\n`;
 
         //SQL MODEL Object
         const _instanceData = {};
@@ -72,11 +73,9 @@ superSQLController.createSQLModel = createSQLModel;
          });
 
         //Create Model
-        let _SQLinstance  =`var ${dataChunk.schema.data.table} = sequelize.define(${dataChunk.schema.data.table}, ${_instanceData});\n `;
+        let _SQLinstance  =`var ${dataChunk.schema.data.table} = sequelize.define(${dataChunk.schema.data.table}s, ${_instanceData});\n `;
 
         console.log(_RequireSQL, _SQLdataBase, _SQLinstance);
-        // console.log(_SQLdataBase);
-        // console.log(_SQLinstance);
     }
 
 
@@ -114,7 +113,7 @@ superSQLController.createSQLModel = createSQLModel;
         // NOTE : This is the mongoose model
         // Example:  var Cat = mongoose.model('Cat',{name: String};
         // /////////////////////////////////////////////
-        let _Mongooseinstance  =`var ${dataChunk.schema.data.table} = mongoose.model(${dataChunk.schema.data.table}, ${_instanceData});`;
+        let _Mongooseinstance  =`var ${dataChunk.schema.data.table} = mongoose.model(${dataChunk.schema.data.table}, ${_instanceData});`
 
         console.log(_RequireMongoose);
         console.log(_Mongooseconnect);
